@@ -9,72 +9,86 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct grafo
+{
+    int vertices;
+    int** matriz;
+} Grafo;
 
-//void dijkstra(int** G,int n,int startnode)
-//{
-// 
-//    int cost[MAX][MAX],distance[MAX],pred[MAX];
-//    int visited[MAX],count,mindistance,i,j;
-//    int nextnode = -1;
-//
-//    for(i = 0;i<n;i++)
-//        for(j = 0;j<n;j++)
-//            if(G[i][j]==0)
-//                cost[i][j]=INFINITY;
-//            else
-//                cost[i][j]=G[i][j];
-//    
-//    //initialize pred[],distance[] and visited[]
-//    for(i=0;i<n;i++)
-//    {
-//        distance[i]=cost[startnode][i];
-//        pred[i]=startnode;
-//        visited[i]=0;
-//    }
-//    
-//    distance[startnode]=0;
-//    visited[startnode]=1;
-//    count=1;
-//    
-//    while(count<n-1)
-//    {
-//        mindistance=INFINITY;
-//        
-//        //nextnode gives the node at minimum distance
-//        for(i = 0; i < n; i++)
-//            if(distance[i]<mindistance&&!visited[i])
-//            {
-//                mindistance=distance[i];
-//                nextnode=i;
-//            }
-//            
-//            //check if a better path exists through nextnode
-//            visited[nextnode]=1;
-//            for(i=0;i<n;i++)
-//                if(!visited[i])
-//                    if(mindistance+cost[nextnode][i]<distance[i])
-//                    {
-//                        distance[i]=mindistance+cost[nextnode][i];
-//                        pred[i]=nextnode;
-//                    }
-//        count++;
-//    }
-// 
-//    //print the path and distance of each node
-//    for(i=0;i<n;i++)
-//        if(i!=startnode)
-//        {
-//            printf("\nDistance of node%d=%d",i,distance[i]);
-//            printf("\nPath=%d",i);
-//            
-//            j=i;
-//            do
-//            {
-//                j=pred[j];
-//                printf("<-%d",j);
-//            }while(j!=startnode);
-//    }
-//}
+void dijkstra(int** G, int n, int startnode)
+{
+
+    int MAX = 100;
+    int INFINITY = 100;
+    
+    int cost[MAX][MAX], distance[MAX], pred[MAX];
+    int visited[MAX], count, mindistance, i, j;
+    int nextnode = -1;
+
+    for(i = 0; i < n; i++)
+        for(j = 0; j < n ; j++)
+            if(G[i][j] == 0)
+                cost[i][j] = INFINITY;
+            else
+                cost[i][j] = G[i][j];
+
+    //initialize pred[],distance[] and visited[]
+    for(i = 0; i < n; i++)
+    {
+        distance[i]=cost[startnode][i];
+        pred[i]=startnode;
+        visited[i]=0;
+    }
+
+    distance[startnode]=0;
+    visited[startnode]=1;
+    count=1;
+
+    while(count < (n - 1))
+    {
+        mindistance=INFINITY;
+
+        //nextnode gives the node at minimum distance
+        for(i = 0; i < n; i++)
+            if(distance[i] < mindistance && !visited[i])
+            {
+                mindistance=distance[i];
+                nextnode=i;
+            }
+
+            //check if a better path exists through nextnode
+            visited[nextnode] = 1;
+            for(i = 0; i < n; i++)
+                if(!visited[i])
+                    if(mindistance + cost[nextnode][i] < distance[i])
+                    {
+                        distance[i] = mindistance + cost[nextnode][i];
+                        pred[i] = nextnode;
+                    }
+        count++;
+    }
+
+    //print the path and distance of each node
+    for(i = 0; i < n; i++)
+    {
+        if(i != startnode)
+        {
+            printf("\nDistancia de nodo %d es %d", i + 1, distance[i]);
+            printf("\nRuta: %d",(i + 1));
+
+            j = i;
+            do
+            {
+                j = pred[j];
+                printf("-%d", (j + 1));
+                
+            } while (j != startnode);
+        }
+        
+    }
+         printf("\n");
+    
+}
 
 // crea matriz y la inicializa
 int** crearMatriz(int size){
@@ -132,7 +146,7 @@ void printMatriz(int **matriz,int size){
 //    int i, j;
 //
 //    printf("Grafo:\n");
-//    
+//
 //    for(i = 0; i < G.vertices; i++) {
 //        for(j = 0; j < G.vertices; j++) {
 //            printf("%2d ", G.matriz[i][j]);
@@ -200,16 +214,16 @@ int** leerGrafo(FILE* f,int size){
     char aux;
 
     int i,indiceColumna,dist;
-    for(i=0; i<size; i++){ //leer las lineas
-        while(feof(f)==0){ // dentro de este bucle lee los vecinos del nodo
+    for(i = 0; i < size; i++){ //leer las lineas
+        while(feof(f) == 0){ // dentro de este bucle lee los vecinos del nodo
             fscanf(f,"%d,%d%c",&indiceColumna,&dist,&aux);
-            matrizAdyacencia[i][indiceColumna-1]=dist;
+            matrizAdyacencia[i][indiceColumna - 1] = dist;
             
-            if(aux=='\n'){ // cuando el caracter %c es un salto de linea salgo del while
+            if(aux == '\n'){ // cuando el caracter %c es un salto de linea salgo del while
                 break;
             }
         }
-        aux=0;
+        aux = 0;
 
     }
     return matrizAdyacencia;
@@ -221,10 +235,17 @@ int main(){
     FILE* f = fopen("/Users/josigna.cp/Projects/Laboratorio 2/Laboratorio 2/grafo.in","r");
     int size;
     fscanf(f,"%d",&size);
-    int** matriz = leerGrafo(f,size);
-    printMatriz(matriz,size);
     
-    //dijkstra(matriz, 7, 1);
+    Grafo* grafo = (Grafo*)malloc(sizeof(Grafo));
+    
+    grafo->vertices = size;
+    
+    //int** matriz = leerGrafo(f, grafo->vertices);
+    grafo->matriz = leerGrafo(f, grafo->vertices);
+    
+    printMatriz(grafo->matriz,size);
+    
+    dijkstra(grafo->matriz, 7, 0);
     
     
     return 0;
