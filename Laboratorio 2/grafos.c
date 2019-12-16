@@ -5,6 +5,11 @@
 //  Created by Jose Ignacio Campos Padilla on 07-12-19.
 //  Copyright © 2019 Jose Ignacio Campos Padilla. All rights reserved.
 //
+// Analisis de algoritmo y estructura de datos
+
+//1. Encontrar la ruta más corta entre dos puntos de entrega y mostrarla por pantalla junto a su distancia.
+//2. Encontrar una ruta que permita pasar por todos los puntos de entrega junto a la distancia total recorrida. En caso de que no sea posible, debe indicarle al usuario en la salida correspondiente.
+//3. Listar todos los puntos de entrega, ordenados de mayor a menor de acuerdo a la cantidad de conexiones que tengan.
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -240,7 +245,6 @@ int main(){
     
     grafo->vertices = size;
     
-    //int** matriz = leerGrafo(f, grafo->vertices);
     grafo->matriz = leerGrafo(f, grafo->vertices);
     
     printMatriz(grafo->matriz,size);
