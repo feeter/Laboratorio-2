@@ -30,6 +30,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "main:grafos.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "grafo-&gt;matriz[0][2]">
+            </PersistentString>
+            <PersistentString
+               value = "Vertices[i]-&gt;label">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "depthFirstSearch:grafos.c">
+      </ContextState>
+      <ContextState
          contextName = "dijkstra:grafos.c">
          <PersistentStrings>
             <PersistentString
@@ -44,17 +58,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "depthFirstSearch:grafos.c">
-      </ContextState>
-      <ContextState
-         contextName = "main:grafos.c">
-         <PersistentStrings>
-            <PersistentString
-               value = "grafo-&gt;matriz[0][2]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "crearGrafo:main.c">
          <PersistentStrings>
             <PersistentString
@@ -64,6 +67,9 @@
       </ContextState>
       <ContextState
          contextName = "peek:grafos.c">
+      </ContextState>
+      <ContextState
+         contextName = "addVertice:grafos.c">
       </ContextState>
       <ContextState
          contextName = "DFSIterativo:grafos.c">

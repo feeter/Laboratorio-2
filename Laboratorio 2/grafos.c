@@ -45,8 +45,9 @@ bool isStackEmpty() {
 }
 
 typedef struct vertice {
-   char label;
+   int label;
    bool visited;
+    int numAristas;
 } Vertice;
 
 //vertex count
@@ -54,6 +55,7 @@ int vertexCount = 0;
 
 //array of vertices
 Vertice* Vertices[MAX];
+
 
 void displayVertex(int vertexIndex) {
    printf("%c ",Vertices[vertexIndex]->label);
@@ -73,10 +75,12 @@ int getAdjUnvisitedVertex(int vertexIndex, int** adjMatrix) {
 }
 
 
-void addVertice(char label) {
+void addVertice(int label, int numAristas) {
     Vertice* vertex = (Vertice*) malloc(sizeof(Vertice));
     vertex->label = label;
     vertex->visited = false;
+    vertex->numAristas = numAristas;
+    
     Vertices[vertexCount++] = vertex;
 }
 
@@ -349,11 +353,41 @@ int* contarAristas(int size, int** grafo)
             
         }
         
+        addVertice(i, cant);
         cantArray[i] = cant;
     }
     
     return cantArray;
 }
+
+
+void Ordenado(int n){
+    
+    int i, j, tmp;
+
+
+    for ( i = 0; i < n; i++)
+    {
+        for (j = i + 1; j < n; j++)
+        {
+            if (Vertices[i]->numAristas < Vertices[j]->numAristas)
+            {
+                tmp = Vertices[i]->numAristas;
+                Vertices[i]->numAristas = Vertices[j]->numAristas;
+                Vertices[j]->numAristas = tmp;
+            }
+        }
+    }
+
+     printf("\nElements of array is sorted in descending order:\n");
+    for(i=0; i<n; i++)
+    {
+        printf("%d  ", Vertices[i]->numAristas);
+    }
+            printf("\n\n");
+    
+}
+
 
 int main(){
     FILE* f = fopen("/Users/josigna.cp/Projects/Laboratorio 2/Laboratorio 2/grafo.in","r");
@@ -380,11 +414,18 @@ int main(){
     //depthFirstSearch(grafo->matriz);
     
     
-    int* countAristas = contarAristas(size, grafo->matriz);
+    contarAristas(size, grafo->matriz);
     
+    /*
+    printf("Puntos ordenados: ");
     for (int i = 0; i < size; i++) {
-        printf("%d-> ", countAristas[i]);
+        printf("\n");
+        printf("%d:  ", ++Vertices[i]->label);
+        printf("%d-> ", Vertices[i]->numAristas);
+        //printf("%d-> ", countAristas[i]);
     }
+    */
+    Ordenado(size);
     
     printf("\n");
     
