@@ -11,10 +11,79 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "getAdjUnvisitedVertex:grafos.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "Vertices[i]-&gt;visited">
+            </PersistentString>
+            <PersistentString
+               value = "adjMatrix[vertexIndex][i]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "displayVertex:grafos.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "Vertices[vertexIndex]-&gt;label">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "dijkstra:grafos.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "pred[j]">
+            </PersistentString>
+            <PersistentString
+               value = "printf(&quot;%d&quot;, distance[3])">
+            </PersistentString>
+            <PersistentString
+               value = "distance[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "depthFirstSearch:grafos.c">
+      </ContextState>
+      <ContextState
+         contextName = "main:grafos.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "grafo-&gt;matriz[0][2]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "crearGrafo:main.c">
          <PersistentStrings>
             <PersistentString
                value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "peek:grafos.c">
+      </ContextState>
+      <ContextState
+         contextName = "DFSIterativo:grafos.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "visited[j]">
+            </PersistentString>
+            <PersistentString
+               value = "matrizAdy[i][j]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DFS:grafos.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "G[i][j]">
+            </PersistentString>
+            <PersistentString
+               value = "visited[j]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

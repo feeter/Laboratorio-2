@@ -13,6 +13,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
+#define MAX 100
+
+int stack[MAX];
+int top = -1;
 
 typedef struct grafo
 {
@@ -20,10 +26,142 @@ typedef struct grafo
     int** matriz;
 } Grafo;
 
+//stack functions
+
+void push(int item) {
+   stack[++top] = item;
+}
+
+int pop() {
+   return stack[top--];
+}
+
+int peek() {
+   return stack[top];
+}
+
+bool isStackEmpty() {
+   return top == -1;
+}
+
+typedef struct vertice {
+   char label;
+   bool visited;
+} Vertice;
+
+//vertex count
+int vertexCount = 0;
+
+//array of vertices
+Vertice* Vertices[MAX];
+
+void displayVertex(int vertexIndex) {
+   printf("%c ",Vertices[vertexIndex]->label);
+}
+
+//get the adjacent unvisited vertex
+int getAdjUnvisitedVertex(int vertexIndex, int** adjMatrix) {
+   int i;
+
+   for(i = 0; i < vertexCount; i++) {
+      if(adjMatrix[vertexIndex][i] == 1 && Vertices[i]->visited == false) {
+         return i;
+      }
+   }
+
+   return -1;
+}
+
+
+void addVertice(char label) {
+    Vertice* vertex = (Vertice*) malloc(sizeof(Vertice));
+    vertex->label = label;
+    vertex->visited = false;
+    Vertices[vertexCount++] = vertex;
+}
+
+
+void depthFirstSearch(int** matriz) {
+   int i;
+
+   //mark first node as visited
+   Vertices[0]->visited = true;
+
+   //display the vertex
+   displayVertex(0);
+
+   //push vertex index in stack
+   push(0);
+
+   while(!isStackEmpty()) {
+      //get the unvisited vertex of vertex which is at top of the stack
+      int unvisitedVertex = getAdjUnvisitedVertex(peek(), matriz);
+
+      //no adjacent vertex found
+      if(unvisitedVertex == -1) {
+         pop();
+      } else {
+         Vertices[unvisitedVertex]->visited = true;
+         displayVertex(unvisitedVertex);
+         push(unvisitedVertex);
+      }
+   }
+
+   //stack is empty, search is complete, reset the visited flag
+   for(i = 0;i < vertexCount;i++) {
+      Vertices[i]->visited = false;
+   }
+}
+/*          ADJACENCY MATRIX                            */
+int source,E,visited[MAX];
+int DFS(int i, int** G, int V)
+{
+    int peso = 0;
+    
+    int j;
+    visited[i] = 1;
+    printf(" %d->",i + 1);
+    for(j = 0; j < V ; j++)
+    {
+        if(G[i][j] > 0 && visited[j] == 0){
+            peso += G[i][j];
+             peso += DFS(j, G, V);
+        }
+            
+           
+    }
+    
+    return peso;
+}
+
+void DFSIterativo(int** matrizAdy, int V){
+    int i, j;
+    //visited[0] = 1;
+    
+    //printf(" %d->", 1);
+    
+    for (i = 0; i < V; i++) {
+        for (j = 0; j < V; j++) {
+            
+            if (matrizAdy[i][j] > 0 && visited[i] == 0)
+            {
+                
+                visited[i] = 1;
+                printf("%d-> ", i + 1);
+                //i = j;
+                //continue;
+            }
+            
+        }
+    }
+    
+    
+}
+
 void dijkstra(int** G, int n, int startnode)
 {
 
-    int MAX = 100;
+    //int MAX = 100;
     int INFINITY = 100;
     
     int cost[MAX][MAX], distance[MAX], pred[MAX];
@@ -74,12 +212,12 @@ void dijkstra(int** G, int n, int startnode)
     }
 
     //print the path and distance of each node
-    for(i = 0; i < n; i++)
+    for(i = n - 1; i < n; i++)
     {
         if(i != startnode)
         {
-            printf("\nDistancia de nodo %d es %d", i + 1, distance[i]);
-            printf("\nRuta: %d",(i + 1));
+            //printf("\nDistancia de nodo %d es %d", i + 1, distance[i]);
+            printf("\nRuta mas corta: %d",(i + 1));
 
             j = i;
             do
@@ -88,6 +226,8 @@ void dijkstra(int** G, int n, int startnode)
                 printf("-%d", (j + 1));
                 
             } while (j != startnode);
+            
+            printf("\nDistancia %d", distance[i]);
         }
         
     }
@@ -110,27 +250,49 @@ int** crearMatriz(int size){
     return matriz;
 }
 
-int** CREAR_MATRIZ(int n) {
-    int **matriz = (int **) malloc(sizeof(int *) * n);
-    int i, j;
-
-    if(matriz) {
-        for(i = 0; i < n; i++) {
-            matriz[i] = (int *) calloc(n, sizeof(int));
-
-            if(!matriz[i]) {
-                for(j = 0; j < i; j++) {
-                    free(matriz[i]);
-                }
-
-                free(matriz);
-                return NULL;
+// crea matriz y la inicializa con 1 las adyaciencias
+int** crearMatrizAdy(int size, int** matrizLargo){
+    int** matriz = (int**)malloc(sizeof(int*)*size);
+    int i,j;
+    for(i = 0; i < size; i++){
+        matriz[i] = (int*)malloc(sizeof(int)*size);
+    }
+    for(i=0; i<size; i++){
+        for(j=0; j<size; j++){
+            matriz[i][j] = 0;
+            
+            if (matriz[i][j] != matrizLargo[i][j])
+            {
+                matriz[i][j] = 1;
+                
             }
         }
     }
-
     return matriz;
 }
+
+
+//int** CREAR_MATRIZ(int n) {
+//    int **matriz = (int **) malloc(sizeof(int *) * n);
+//    int i, j;
+//
+//    if(matriz) {
+//        for(i = 0; i < n; i++) {
+//            matriz[i] = (int *) calloc(n, sizeof(int));
+//
+//            if(!matriz[i]) {
+//                for(j = 0; j < i; j++) {
+//                    free(matriz[i]);
+//                }
+//
+//                free(matriz);
+//                return NULL;
+//            }
+//        }
+//    }
+//
+//    return matriz;
+//}
 
 
 void printMatriz(int **matriz,int size){
@@ -147,79 +309,19 @@ void printMatriz(int **matriz,int size){
 
 
 
-//void MOSTRAR(grafo G) {
-//    int i, j;
-//
-//    printf("Grafo:\n");
-//
-//    for(i = 0; i < G.vertices; i++) {
-//        for(j = 0; j < G.vertices; j++) {
-//            printf("%2d ", G.matriz[i][j]);
-//        }
-//
-//        printf("\n");
-//    }
-//
-//    printf("\n");
-//}
-
-//grafo ANULAR_GRAFO(grafo G) {
-//    int i;
-//
-//    for(i = 0; i < G.vertices; i++) {
-//        free(G.matriz[i]);
-//    }
-//
-//    free(G.matriz);
-//    G.matriz = NULL;
-//    G.vertices = 0;
-//    return G;
-//}
-
-
-//grafo LEER_GRAFO(char *nombreArchivo) {
-//    int i, j, peso;
-//
-//    FILE *archivo = fopen(nombreArchivo, "r");
-//    grafo G;
-//
-//    if(!archivo) {
-//        G.matriz = NULL;
-//        G.vertices = 0;
-//        return G;
-//    }
-//
-//    fscanf(archivo, "%d %d", &G.esDirigido, &G.vertices);
-//    G.matriz = CREAR_MATRIZ(G.vertices);
-//
-//    if(!G.matriz) {
-//        fclose(archivo);
-//        G.vertices = 0;
-//        return G;
-//    }
-//
-//    while(fscanf(archivo,"%d %d %d", &i, &j, &peso) == 3) {
-//        G.matriz[i][j] = peso;
-//
-//        if(!G.esDirigido) {
-//            G.matriz[j][i] = peso;
-//        }
-//    }
-//
-//    fclose(archivo);
-//    return G;
-//}
-
 
 //
 int** leerGrafo(FILE* f,int size){
 
     int** matrizAdyacencia = crearMatriz(size);
-    printMatriz(matrizAdyacencia, size);
+    //printMatriz(matrizAdyacencia, size);
     char aux;
 
     int i,indiceColumna,dist;
     for(i = 0; i < size; i++){ //leer las lineas
+        
+        //addVertice(i);
+        
         while(feof(f) == 0){ // dentro de este bucle lee los vecinos del nodo
             fscanf(f,"%d,%d%c",&indiceColumna,&dist,&aux);
             matrizAdyacencia[i][indiceColumna - 1] = dist;
@@ -234,7 +336,24 @@ int** leerGrafo(FILE* f,int size){
     return matrizAdyacencia;
 }
 
-
+int* contarAristas(int size, int** grafo)
+{
+    int* cantArray = (int*) malloc(sizeof(int));
+    
+    for (int i = 0; i < size; i++) {
+        int cant = 0;
+        for (int j = 0; j < size; j++) {
+            
+            if (grafo[i][j] > 0)
+                cant += 1;
+            
+        }
+        
+        cantArray[i] = cant;
+    }
+    
+    return cantArray;
+}
 
 int main(){
     FILE* f = fopen("/Users/josigna.cp/Projects/Laboratorio 2/Laboratorio 2/grafo.in","r");
@@ -251,6 +370,23 @@ int main(){
     
     dijkstra(grafo->matriz, 7, 0);
     
+    //int** matrizAdyacencia = crearMatrizAdy(size, grafo->matriz);
+    
+    int peso = DFS(0, grafo->matriz, size);
+    printf("\nDistancia %d \n", peso);
+    
+    //DFSIterativo(grafo->matriz, size);
+    
+    //depthFirstSearch(grafo->matriz);
+    
+    
+    int* countAristas = contarAristas(size, grafo->matriz);
+    
+    for (int i = 0; i < size; i++) {
+        printf("%d-> ", countAristas[i]);
+    }
+    
+    printf("\n");
     
     return 0;
 }
