@@ -275,30 +275,6 @@ int** crearMatrizAdy(int size, int** matrizLargo){
     return matriz;
 }
 
-
-//int** CREAR_MATRIZ(int n) {
-//    int **matriz = (int **) malloc(sizeof(int *) * n);
-//    int i, j;
-//
-//    if(matriz) {
-//        for(i = 0; i < n; i++) {
-//            matriz[i] = (int *) calloc(n, sizeof(int));
-//
-//            if(!matriz[i]) {
-//                for(j = 0; j < i; j++) {
-//                    free(matriz[i]);
-//                }
-//
-//                free(matriz);
-//                return NULL;
-//            }
-//        }
-//    }
-//
-//    return matriz;
-//}
-
-
 void printMatriz(int **matriz,int size){
     int i,j;
     printf("\n");
@@ -311,10 +287,6 @@ void printMatriz(int **matriz,int size){
     printf("\n");
 }
 
-
-
-
-//
 int** leerGrafo(FILE* f,int size){
 
     int** matrizAdyacencia = crearMatriz(size);
@@ -363,7 +335,8 @@ int* contarAristas(int size, int** grafo)
 
 void Ordenado(int n){
     
-    int i, j, tmp;
+    int i, j;
+    Vertice* tmp;
 
 
     for ( i = 0; i < n; i++)
@@ -372,19 +345,20 @@ void Ordenado(int n){
         {
             if (Vertices[i]->numAristas < Vertices[j]->numAristas)
             {
-                tmp = Vertices[i]->numAristas;
-                Vertices[i]->numAristas = Vertices[j]->numAristas;
-                Vertices[j]->numAristas = tmp;
+                tmp = Vertices[i];
+                Vertices[i] = Vertices[j];
+                Vertices[j] = tmp;
             }
         }
     }
 
-     printf("\nElements of array is sorted in descending order:\n");
-    for(i=0; i<n; i++)
+     printf("\nPuntos Ordenados:\n");
+    for(i = 0; i < n; i++)
     {
-        printf("%d  ", Vertices[i]->numAristas);
+        printf("%d  ", ++Vertices[i]->label);
     }
-            printf("\n\n");
+    
+    printf("\n\n");
     
 }
 
@@ -397,34 +371,17 @@ int main(){
     Grafo* grafo = (Grafo*)malloc(sizeof(Grafo));
     
     grafo->vertices = size;
-    
     grafo->matriz = leerGrafo(f, grafo->vertices);
     
     printMatriz(grafo->matriz,size);
     
     dijkstra(grafo->matriz, 7, 0);
     
-    //int** matrizAdyacencia = crearMatrizAdy(size, grafo->matriz);
-    
     int peso = DFS(0, grafo->matriz, size);
     printf("\nDistancia %d \n", peso);
-    
-    //DFSIterativo(grafo->matriz, size);
-    
-    //depthFirstSearch(grafo->matriz);
-    
+  
     
     contarAristas(size, grafo->matriz);
-    
-    /*
-    printf("Puntos ordenados: ");
-    for (int i = 0; i < size; i++) {
-        printf("\n");
-        printf("%d:  ", ++Vertices[i]->label);
-        printf("%d-> ", Vertices[i]->numAristas);
-        //printf("%d-> ", countAristas[i]);
-    }
-    */
     Ordenado(size);
     
     printf("\n");
