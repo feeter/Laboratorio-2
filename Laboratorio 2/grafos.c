@@ -84,7 +84,7 @@ void addVertice(int label, int numAristas) {
     Vertices[vertexCount++] = vertex;
 }
 
-
+/*
 void depthFirstSearch(int** matriz) {
    int i;
 
@@ -116,15 +116,18 @@ void depthFirstSearch(int** matriz) {
       Vertices[i]->visited = false;
    }
 }
+*/
+ 
 /*          ADJACENCY MATRIX                            */
 int source,E,visited[MAX];
+
 int DFS(int i, int** G, int V)
 {
     int peso = 0;
     
     int j;
     visited[i] = 1;
-    printf(" %d->",i + 1);
+    printf("%d-",i + 1);
     for(j = 0; j < V ; j++)
     {
         if(G[i][j] > 0 && visited[j] == 0){
@@ -179,7 +182,7 @@ void dijkstra(int** G, int n, int startnode)
             else
                 cost[i][j] = G[i][j];
 
-    //initialize pred[],distance[] and visited[]
+
     for(i = 0; i < n; i++)
     {
         distance[i]=cost[startnode][i];
@@ -203,7 +206,8 @@ void dijkstra(int** G, int n, int startnode)
                 nextnode=i;
             }
 
-            //check if a better path exists through nextnode
+            
+        // verifica si existe una mejor ruta a travez de nextnode
             visited[nextnode] = 1;
             for(i = 0; i < n; i++)
                 if(!visited[i])
@@ -215,12 +219,12 @@ void dijkstra(int** G, int n, int startnode)
         count++;
     }
 
-    //print the path and distance of each node
+    //imprime la ruta y la distancia de cada nodo
     for(i = n - 1; i < n; i++)
     {
         if(i != startnode)
         {
-            //printf("\nDistancia de nodo %d es %d", i + 1, distance[i]);
+
             printf("\nRuta mas corta: %d",(i + 1));
 
             j = i;
@@ -240,7 +244,7 @@ void dijkstra(int** G, int n, int startnode)
 }
 
 // crea matriz y la inicializa
-int** crearMatriz(int size){
+int** crearMatriz(int size) {
     int** matriz = (int**)malloc(sizeof(int*)*size);
     int i,j;
     for(i = 0; i < size; i++){
@@ -312,7 +316,7 @@ int** leerGrafo(FILE* f,int size){
     return matrizAdyacencia;
 }
 
-int* contarAristas(int size, int** grafo)
+int* obtenerAristas(int size, int** grafo)
 {
     int* cantArray = (int*) malloc(sizeof(int));
     
@@ -352,7 +356,7 @@ void Ordenado(int n){
         }
     }
 
-     printf("\nPuntos Ordenados:\n");
+     printf("\nPuntos Ordenados: ");
     for(i = 0; i < n; i++)
     {
         printf("%d  ", ++Vertices[i]->label);
@@ -365,7 +369,7 @@ void Ordenado(int n){
 
 int main(){
     FILE* f = fopen("/Users/josigna.cp/Projects/Laboratorio 2/Laboratorio 2/grafo.in","r");
-    int size;
+    int size, ptoInicio, ptoFin;
     fscanf(f,"%d",&size);
     
     Grafo* grafo = (Grafo*)malloc(sizeof(Grafo));
@@ -375,13 +379,30 @@ int main(){
     
     printMatriz(grafo->matriz,size);
     
-    dijkstra(grafo->matriz, 7, 0);
+    int salir;
     
+    do {
+        printf("Ingrese punto de inicio: \n");
+        scanf ("%d",&ptoInicio);
+        
+        printf("Ingrese punto de destino: \n");
+        scanf ("%d",&ptoFin);
+        
+        //dijkstra(grafo->matriz, 7, 0);
+        dijkstra(grafo->matriz, ptoFin, --ptoInicio);
+        
+        
+        printf("Ingrese 1 para buscar otra ruta o 2 para salir: ");
+        scanf("%d", &salir);
+    } while (salir != 2);
+    
+
+
     int peso = DFS(0, grafo->matriz, size);
     printf("\nDistancia %d \n", peso);
   
     
-    contarAristas(size, grafo->matriz);
+    obtenerAristas(size, grafo->matriz);
     Ordenado(size);
     
     printf("\n");
