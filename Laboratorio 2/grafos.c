@@ -121,18 +121,20 @@ void depthFirstSearch(int** matriz) {
 /*          ADJACENCY MATRIX                            */
 int source,E,visited[MAX];
 
-int DFS(int i, int** G, int V)
+int DFS(int i, int** G, int V, FILE* fp)
 {
     int peso = 0;
     
     int j;
     visited[i] = 1;
-    printf("%d-",i + 1);
+    //printf("%d-",i + 1);
+    fprintf(fp, "%d-",i + 1);
+    
     for(j = 0; j < V ; j++)
     {
         if(G[i][j] > 0 && visited[j] == 0){
             peso += G[i][j];
-             peso += DFS(j, G, V);
+            peso += DFS(j, G, V, fp);
         }
             
            
@@ -239,7 +241,7 @@ void dijkstra(int** G, int n, int startnode)
         }
         
     }
-         printf("\n");
+         printf("\n\n");
     
 }
 
@@ -337,7 +339,7 @@ int* obtenerAristas(int size, int** grafo)
 }
 
 
-void Ordenado(int n){
+void Ordenado(int n, FILE* fp){
     
     int i, j;
     Vertice* tmp;
@@ -356,13 +358,17 @@ void Ordenado(int n){
         }
     }
 
-     printf("\nPuntos Ordenados: ");
+     //printf("\nPuntos Ordenados: ");
+    fprintf (fp, "Puntos Ordenados: ");
+    
     for(i = 0; i < n; i++)
     {
-        printf("%d  ", ++Vertices[i]->label);
+        //printf("%d  ", ++Vertices[i]->label);
+        fprintf (fp, "%d-", ++Vertices[i]->label);
     }
     
-    printf("\n\n");
+    //printf("\n\n");
+    fprintf (fp, "\n");
     
 }
 
@@ -377,7 +383,7 @@ int main(){
     grafo->vertices = size;
     grafo->matriz = leerGrafo(f, grafo->vertices);
     
-    printMatriz(grafo->matriz,size);
+    //printMatriz(grafo->matriz,size);
     
     int salir;
     
@@ -397,13 +403,17 @@ int main(){
     } while (salir != 2);
     
 
+    FILE* fp = fopen("archivo.txt","w");
 
-    int peso = DFS(0, grafo->matriz, size);
-    printf("\nDistancia %d \n", peso);
-  
+    fprintf(fp, "Ruta: ");
+    
+    int peso = DFS(0, grafo->matriz, size, fp);
+    //printf("\nDistancia %d \n", peso);
+    fprintf(fp, " Distancia %d \n", peso);
+    
     
     obtenerAristas(size, grafo->matriz);
-    Ordenado(size);
+    Ordenado(size, fp);
     
     printf("\n");
     
