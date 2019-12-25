@@ -17,8 +17,6 @@
 
 #define MAX 100
 
-int stack[MAX];
-int top = -1;
 
 typedef struct grafo
 {
@@ -26,55 +24,19 @@ typedef struct grafo
     int** matriz;
 } Grafo;
 
-//stack functions
-
-void push(int item) {
-   stack[++top] = item;
-}
-
-int pop() {
-   return stack[top--];
-}
-
-int peek() {
-   return stack[top];
-}
-
-bool isStackEmpty() {
-   return top == -1;
-}
-
 typedef struct vertice {
    int label;
    bool visited;
     int numAristas;
 } Vertice;
 
-//vertex count
+//Contador de vertices
 int vertexCount = 0;
 
-//array of vertices
+//arreglo de los vertices
 Vertice* Vertices[MAX];
 
-
-void displayVertex(int vertexIndex) {
-   printf("%c ",Vertices[vertexIndex]->label);
-}
-
-//get the adjacent unvisited vertex
-int getAdjUnvisitedVertex(int vertexIndex, int** adjMatrix) {
-   int i;
-
-   for(i = 0; i < vertexCount; i++) {
-      if(adjMatrix[vertexIndex][i] == 1 && Vertices[i]->visited == false) {
-         return i;
-      }
-   }
-
-   return -1;
-}
-
-
+// agrega vertices al arreglo y los cuenta a medida que se van ingresando
 void addVertice(int label, int numAristas) {
     Vertice* vertex = (Vertice*) malloc(sizeof(Vertice));
     vertex->label = label;
@@ -84,43 +46,11 @@ void addVertice(int label, int numAristas) {
     Vertices[vertexCount++] = vertex;
 }
 
-/*
-void depthFirstSearch(int** matriz) {
-   int i;
 
-   //mark first node as visited
-   Vertices[0]->visited = true;
+// arreglo de los nodos visitados
+int visited[MAX];
 
-   //display the vertex
-   displayVertex(0);
-
-   //push vertex index in stack
-   push(0);
-
-   while(!isStackEmpty()) {
-      //get the unvisited vertex of vertex which is at top of the stack
-      int unvisitedVertex = getAdjUnvisitedVertex(peek(), matriz);
-
-      //no adjacent vertex found
-      if(unvisitedVertex == -1) {
-         pop();
-      } else {
-         Vertices[unvisitedVertex]->visited = true;
-         displayVertex(unvisitedVertex);
-         push(unvisitedVertex);
-      }
-   }
-
-   //stack is empty, search is complete, reset the visited flag
-   for(i = 0;i < vertexCount;i++) {
-      Vertices[i]->visited = false;
-   }
-}
-*/
- 
-/*          ADJACENCY MATRIX                            */
-int source,E,visited[MAX];
-
+// Busqueda en profundidad o en ingles: depthFirstSearch
 int DFS(int i, int** G, int V, FILE* fp)
 {
     int peso = 0;
@@ -141,30 +71,6 @@ int DFS(int i, int** G, int V, FILE* fp)
     }
     
     return peso;
-}
-
-void DFSIterativo(int** matrizAdy, int V){
-    int i, j;
-    //visited[0] = 1;
-    
-    //printf(" %d->", 1);
-    
-    for (i = 0; i < V; i++) {
-        for (j = 0; j < V; j++) {
-            
-            if (matrizAdy[i][j] > 0 && visited[i] == 0)
-            {
-                
-                visited[i] = 1;
-                printf("%d-> ", i + 1);
-                //i = j;
-                //continue;
-            }
-            
-        }
-    }
-    
-    
 }
 
 void dijkstra(int** G, int n, int startnode)
@@ -255,27 +161,6 @@ int** crearMatriz(int size) {
     for(i=0; i<size; i++){
         for(j=0; j<size; j++){
             matriz[i][j]=0;
-        }
-    }
-    return matriz;
-}
-
-// crea matriz y la inicializa con 1 las adyaciencias
-int** crearMatrizAdy(int size, int** matrizLargo){
-    int** matriz = (int**)malloc(sizeof(int*)*size);
-    int i,j;
-    for(i = 0; i < size; i++){
-        matriz[i] = (int*)malloc(sizeof(int)*size);
-    }
-    for(i=0; i<size; i++){
-        for(j=0; j<size; j++){
-            matriz[i][j] = 0;
-            
-            if (matriz[i][j] != matrizLargo[i][j])
-            {
-                matriz[i][j] = 1;
-                
-            }
         }
     }
     return matriz;

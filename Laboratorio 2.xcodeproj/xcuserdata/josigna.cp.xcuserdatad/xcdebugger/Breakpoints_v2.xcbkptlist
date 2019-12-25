@@ -14,8 +14,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "crearMatriz(size)"
             landmarkType = "9">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "dijkstra(G, n, startnode)"
             landmarkType = "9">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "dijkstra(G, n, startnode)"
             landmarkType = "9">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "dijkstra(G, n, startnode)"
             landmarkType = "9">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "dijkstra(G, n, startnode)"
             landmarkType = "9">
          </BreakpointContent>
@@ -94,25 +94,9 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "dijkstra(G, n, startnode)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "57419614-8164-4F8D-81B0-5F3B21DD8DE2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Laboratorio 2/grafos.c"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "getAdjUnvisitedVertex(vertexIndex, adjMatrix)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -126,8 +110,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "addVertice(label, numAristas)"
             landmarkType = "9">
          </BreakpointContent>
@@ -142,57 +126,9 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "DFS(i, G, V, fp)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DE66770E-335F-485D-B4E3-E596E7FFE188"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Laboratorio 2/grafos.c"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
-            landmarkName = "crearMatrizAdy(size, matrizLargo)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E9517786-8258-4223-BF2A-64A8444DFB5A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Laboratorio 2/grafos.c"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
-            landmarkName = "crearMatrizAdy(size, matrizLargo)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8BB8F6C2-0020-4C30-B6F5-5B06267918FC"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Laboratorio 2/grafos.c"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "DFSIterativo(matrizAdy, V)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -206,8 +142,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "addVertice(label, numAristas)"
             landmarkType = "9">
          </BreakpointContent>
@@ -222,8 +158,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "416"
-            endingLineNumber = "416"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "main()"
             landmarkType = "9">
          </BreakpointContent>
@@ -238,8 +174,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "364"
-            endingLineNumber = "364"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "Ordenado(n, fp)"
             landmarkType = "9">
          </BreakpointContent>
@@ -254,8 +190,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "obtenerAristas(size, grafo)"
             landmarkType = "9">
          </BreakpointContent>
@@ -270,8 +206,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
+            startingLineNumber = "287"
+            endingLineNumber = "287"
             landmarkName = "main()"
             landmarkType = "9">
          </BreakpointContent>
@@ -286,8 +222,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "main()"
             landmarkType = "9">
          </BreakpointContent>
@@ -302,8 +238,8 @@
             filePath = "Laboratorio 2/grafos.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
             landmarkName = "main()"
             landmarkType = "9">
          </BreakpointContent>
