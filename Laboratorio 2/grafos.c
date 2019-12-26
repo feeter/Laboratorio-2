@@ -106,24 +106,32 @@ void dijkstra(int** G, int n, int startnode)
     {
         mindistance=INFINITY;
 
-        //nextnode gives the node at minimum distance
+        // nextnode entrega la distancia minima del nodo
         for(i = 0; i < n; i++)
+        {
             if(distance[i] < mindistance && !visited[i])
             {
-                mindistance=distance[i];
-                nextnode=i;
+                mindistance = distance[i];
+                nextnode = i;
             }
+        }
 
             
         // verifica si existe una mejor ruta a travez de nextnode
-            visited[nextnode] = 1;
-            for(i = 0; i < n; i++)
-                if(!visited[i])
-                    if(mindistance + cost[nextnode][i] < distance[i])
-                    {
-                        distance[i] = mindistance + cost[nextnode][i];
-                        pred[i] = nextnode;
-                    }
+        visited[nextnode] = 1;
+        for(i = 0; i < n; i++)
+        {
+            if(!visited[i])
+            {
+                if(mindistance + cost[nextnode][i] < distance[i])
+                {
+                    distance[i] = mindistance + cost[nextnode][i];
+                    pred[i] = nextnode;
+                }
+            }
+            
+        }
+            
         count++;
     }
 
@@ -288,7 +296,7 @@ int main(){
     } while (salir != 2);
     
 
-    FILE* fp = fopen("archivo.txt","w");
+    FILE* fp = fopen("resultados.out","w");
 
     fprintf(fp, "Ruta: ");
     
@@ -299,8 +307,6 @@ int main(){
     
     obtenerAristas(size, grafo->matriz);
     Ordenado(size, fp);
-    
-    printf("\n");
     
     return 0;
 }
