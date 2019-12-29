@@ -197,7 +197,7 @@ int** leerGrafo(FILE* f,int size){
         
         //addVertice(i);
         
-        while(feof(f) == 0){ // dentro de este bucle lee los vecinos del nodo
+        while(feof(f) == 0){ // adentro de este bucle lee los vecinos del nodo
             fscanf(f,"%d,%d%c",&indiceColumna,&dist,&aux);
             matrizAdyacencia[i][indiceColumna - 1] = dist;
             
@@ -267,7 +267,7 @@ void Ordenado(int n, FILE* fp){
 
 
 int main(){
-    FILE* f = fopen("/Users/josigna.cp/Projects/Laboratorio 2/Laboratorio 2/grafo.in","r");
+    FILE* f = fopen("/Users/josigna.cp/Documents/USACH/Materias/Semestre 2/ANÁLISIS DE ALGORITMOS Y ESTRUCTURA DE DATOS/Laboratorio 2/entregas2.in","r");
     int size, ptoInicio, ptoFin;
     fscanf(f,"%d",&size);
     
@@ -278,7 +278,7 @@ int main(){
     
     //printMatriz(grafo->matriz,size);
     
-    int salir;
+    int salir = 1;
     
     do {
         printf("Ingrese punto de inicio: \n");
@@ -287,12 +287,22 @@ int main(){
         printf("Ingrese punto de destino: \n");
         scanf ("%d",&ptoFin);
         
-        //dijkstra(grafo->matriz, 7, 0);
-        dijkstra(grafo->matriz, ptoFin, --ptoInicio);
+        if (ptoInicio > ptoFin || ptoInicio == ptoFin)
+        {
+            printf("Advertencia: Favor ingresar punto de inicio menor al punto de fin y que sean diferentes. \n ");
+            
+        }
+        else
+        {
+            //dijkstra(grafo->matriz, 7, 0);
+            dijkstra(grafo->matriz, ptoFin, --ptoInicio);
+            
+            
+            printf("Ingrese 1 para buscar otra ruta o 2 para salir: ");
+            scanf("%d", &salir);
+        }
         
         
-        printf("Ingrese 1 para buscar otra ruta o 2 para salir: ");
-        scanf("%d", &salir);
     } while (salir != 2);
     
 
